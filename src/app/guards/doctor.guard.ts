@@ -27,7 +27,7 @@ export class DoctorGuard{
         var userStorage = JSON.parse(localStorage.getItem('userData') || '{}');
         this.firestore.getUserRole(userStorage.uid).then
         (role => {
-          if (role == 'Doctor') {
+          if( role == 'Doctor') {
             this.spinnerService.hide();   
             return true;
           }
@@ -35,14 +35,18 @@ export class DoctorGuard{
           if( role == 'Admin') {
             this.router.navigate(['/admin']);
             this.spinnerService.hide();
-            this.toastr.error("Acceso denegado. No tiene permisos para acceder a esta página.");  
+            setTimeout(()=>{
+              this.toastr.error("Acceso denegado. No tiene permisos para acceder a esta página.");  
+            }, 5000);
             return false;
           }
           
           if( role == 'Patient') {
             this.router.navigate(['/patient']); 
             this.spinnerService.hide();
-            this.toastr.error("Acceso denegado. No tiene permisos para acceder a esta página.");   
+            setTimeout(()=>{
+              this.toastr.error("Acceso denegado. No tiene permisos para acceder a esta página.");  
+            }, 5000);
             return false;      
           }
     

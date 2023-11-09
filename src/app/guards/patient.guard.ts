@@ -22,23 +22,30 @@ export class PatientGuard {
     this.afAuth.authState.subscribe((user) => {
       if (user) {
         var userStorage = JSON.parse(localStorage.getItem('userData') || '{}');
-        this.firestore.getUserRole(userStorage.uid).then        (role => {
+        this.firestore.getUserRole(userStorage.uid).then
+        (role => {
           console.log(role);
-          if (role == 'Patient') {
+          if( role == 'Patient') {
             this.router.navigate(['/patient']);
             this.spinnerService.hide();   
             return true;
           }
+
           if( role == 'Admin') {
             this.router.navigate(['/admin']);
             this.spinnerService.hide();
-            this.toastr.error("Acceso denegado. No tiene permisos para acceder a esta página.");
+            setTimeout(()=>{
+              this.toastr.error("Acceso denegado. No tiene permisos para acceder a esta página.");  
+            }, 5000);
             return false;
           }
+          
           if( role == 'Doctor') {
             this.router.navigate(['/doctor']);
             this.spinnerService.hide();
-            this.toastr.error("Acceso denegado. No tiene permisos para acceder a esta página.");
+            setTimeout(()=>{
+              this.toastr.error("Acceso denegado. No tiene permisos para acceder a esta página.");  
+            }, 5000);
             return false;     
           }
           this.spinnerService.hide();

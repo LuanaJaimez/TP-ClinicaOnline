@@ -32,17 +32,21 @@ export class AdminGuard {
             return true;
           }
           
-          if (role == 'Doctor') {
+          if( role == 'Doctor') {
             this.router.navigate(['/doctor']);
-            this.toastr.error("Acceso denegado. No tiene permisos para acceder a esta página.");   
             this.spinnerService.hide();
+            setTimeout(()=>{
+              this.toastr.error("Acceso denegado. No tiene permisos para acceder a esta página.");  
+            }, 5000);
             return false;
           }
     
           if( role == 'Patient') {
             this.router.navigate(['/patient']);
             this.spinnerService.hide(); 
-            this.toastr.error("Acceso denegado. No tiene permisos para acceder a esta página.");   
+            setTimeout(()=>{
+              this.toastr.error("Acceso denegado. No tiene permisos para acceder a esta página.");  
+            }, 5000);  
             return false;  
           }
     

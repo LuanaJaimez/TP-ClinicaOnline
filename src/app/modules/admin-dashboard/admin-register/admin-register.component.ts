@@ -73,7 +73,6 @@ export class AdminRegisterComponent implements OnInit {
           .then((res) => {})
           .catch((e) => {
           this.toastr.error(e.message);
-          this.toastr.error(e.message);
         })
         .finally(() => {
           this.spinnerService.hide();
