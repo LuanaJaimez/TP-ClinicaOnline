@@ -1,0 +1,41 @@
+<div *ngIf="this.userData as user">
+    <div class="col">
+        <img class="img-thumbnail img-fluid"
+            src="{{(user.photoURL) ? user.photoURL : '/assets/common/profile-user.png'}}" alt="{{user.displayName}}">
+        <hr>
+        <div class="col">
+
+            <div class="col-md-12 info">
+                <p>Usuario: <strong>{{(user.displayName)}}</strong></p>
+                <p>Email: <strong>{{user.email}}</strong></p>
+                <hr>
+                <div *ngIf="user.role == 'Patient'">
+                    <p>Obra Social: <strong>{{(user.insurance)}}</strong></p>
+                </div>
+                <div *ngIf="user.role == 'Doctor'">
+                    <p>Especialidades:</p>
+                    <div *ngFor="let specialty of user.specialties; let i=index">
+                        <ul>
+                            <li>{{specialty}}</li>
+                        </ul>
+                    </div>
+                    <hr>
+                    <p>Dias y Horarios de Atencion:</p>
+                    <div>
+                        <p>No tiene dias y horarios de atencion cargados</p>
+                    </div>
+                    <ng-template #elseBlock>
+                        <div>
+                            <ul>
+                                <li>{{hours}}</li>
+                            </ul>
+                        </div>
+                    </ng-template>
+                </div>
+                <div *ngIf="user.role == 'Admin'">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

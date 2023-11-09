@@ -1,0 +1,128 @@
+<div class="container col-md-4">
+    <div class="bg-light border rounded-3">
+        <div class="container-fluid py-1">
+            <div>
+                <br>
+                <h1 style="text-align: center;">Registro de Doctor</h1>
+                <hr>
+                <div class="row align-items-md-stretch">
+                    <div class="col-md-12" style="text-align: center;">
+                        <form [formGroup]="formReg">
+                            <div class="row align-items-md-stretch">
+                                <div class="form-group col-md-6">
+                                    <div class="form-group">
+                                        <label style="float: left">Nombre</label>
+                                        <input class="form-control" formControlName="name" type="name"
+                                            placeholder="Ingrese nombre" [(ngModel)]="doctor.name" required>
+                                        <div class="errorMessage"
+                                            *ngIf="getValue('name')?.invalid && (getValue('name').touched || getValue('name').dirty)">
+                                            Ingrese un nombre valido</div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <div class="form-group">
+                                        <label style="float: left">Apellido</label>
+                                        <input class="form-control" formControlName="apellido" type="apellido"
+                                            placeholder="Ingrese apellido" [(ngModel)]="doctor.lastName" required>
+                                        <div class="errorMessage"
+                                            *ngIf="getValue('lastName')?.invalid && (getValue('lastName').touched || getValue('lastName').dirty)">
+                                            Ingrese un apellido valido</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row align-items-md-stretch">
+                                <div class="form-group col-md-9">
+                                    <div class="form-group">
+                                        <label style="float: left">DNI</label>
+                                        <input class="form-control" formControlName="dni" type="dni"
+                                            placeholder="Ingrese DNI" [(ngModel)]="doctor.dni" required>
+                                        <div class="errorMessage"
+                                            *ngIf="getValue('dni')?.invalid && (getValue('dni').touched || getValue('dni').dirty)">
+                                            Ingrese un DNI valido</div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <div class="form-group">
+                                        <label style="float: left">Edad</label>
+                                        <input class="form-control" formControlName="age" type="age"
+                                            placeholder="Ingrese edad" [(ngModel)]="doctor.age" required>
+                                        <div class="errorMessage"
+                                            *ngIf="getValue('age')?.invalid && (getValue('age').touched || getValue('age').dirty)">
+                                            Ingrese una edad válida (18-120)</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="form-group col-md-12">
+                                <div class="form-group">
+                                    <label style="float: left">Especialidades:</label>
+                                    <br>
+                                    <div class="btn-group btn-group-sm m-1" *ngFor="let specialty of specialtiesList; let i=index">
+                                        <input type="checkbox" class="btn-check" id={{specialty}} autocomplete="off" [value]="specialty" (change)="onCheckboxChange($event)" />
+                                        <label class="btn btn-outline-dark day" for={{specialty}}>
+                                            {{specialty}}
+                                        </label>
+                                    </div>
+                                </div> 
+                            </div>
+                            <br>
+                            <div class="form-group col-md-12">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Agregue su especialidad si no se encuentra en la lista" [formControl]="extraSpecialty">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-dark" type="button" (click)="addSpecialty()">AGREGAR</button>
+                                    </div>
+                                    </div>                                    
+                            </div>
+                                <div class="form-group">
+                                    <label style="float: left">Email</label>
+                                    <input class="form-control" formControlName="email" type="email"
+                                        placeholder="Ingrese email" [(ngModel)]="doctor.email" required>
+                                    <div class="errorMessage"
+                                        *ngIf="getValue('email')?.invalid && (getValue('email').touched || getValue('email').dirty)">
+                                        Ingrese un mail válido</div>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label style="float: left">Contraseña</label>
+                                    <input autocomplete="new-password" #password class="form-control"
+                                        formControlName="password" type="password" placeholder="Ingrese contraseña"
+                                        [(ngModel)]="doctor.password" required>
+                                    <div class="errorMessage"
+                                        *ngIf="getValue('password')?.invalid && (getValue('password').touched || getValue('password').dirty)">
+                                        Mínimo 6 caracteres</div>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label style="float: left">Repita la contraseña</label>
+                                    <input autocomplete="new-password" #password class="form-control"
+                                        formControlName="rePassword" type="password"
+                                        placeholder="Ingrese contraseña nuevamente" [(ngModel)]="rePassword" required>
+                                    <div class="errorMessage"
+                                        *ngIf="getValue('rePassword')?.invalid && (getValue('rePassword').touched || getValue('rePassword').dirty)">
+                                        Mínimo 6 caracteres</div>
+                                </div>
+                                <br>
+                                <div class="container-input-file">
+                                    <div>
+                                        <input class="form-control" formControlName="file" type="file" multiple
+                                            (change)="uploadImage($event)" placeholder="Ingrese su imagen">
+                                    </div>
+                                </div>
+                            <hr>
+                            <label style="float: left">Captcha</label>
+                            <br>
+                            <app-captcha (captchaResult)="captchaResult($event)"></app-captcha>
+                            <hr>
+                            <div class="col">
+                                <button class="btn btn-dark form-control" (click)="registerDoctor()" [disabled]="!formReg.valid">Registrar</button>
+                                <button class="btn btn-outline-danger form-control" routerLink="/register">Volver</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

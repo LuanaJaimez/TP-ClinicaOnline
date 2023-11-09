@@ -1,0 +1,7 @@
+<app-navbar></app-navbar>
+<div
+  [@doctor]="getState(o)"
+  [@patients]="getState(o)"
+>
+  <router-outlet #o="outlet" > </router-outlet>
+</div>

@@ -1,0 +1,26 @@
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" routerLink="./">{{user | userType}}</a>
+    <div class="collapse navbar-collapse d-flex" id="navbarNavAltMarkup">
+        <div class="navbar-nav p-2" >
+
+            <ul class="navbar-nav mr-auto" *ngIf="user == 'Admin'">
+                <li class="nav-item" >
+                    <a class="nav-link active" aria-current="page" routerLink="register-admin">Alta administrador</a>
+                </li>
+                <li class="nav-item" >
+                    <a class="nav-link active" aria-current="page" routerLink="users">Ver usuarios</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav mr-auto" *ngIf="user == 'Patient'">
+            </ul>
+            
+            <ul class="navbar-nav mr-auto" *ngIf="user == 'Doctor'">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" routerLink="patients">Pacientes</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <button class="btn btn-outline-danger" type="submit" (click)="logout()">Cerrar Sesión</button>
+</nav>

@@ -1,0 +1,9 @@
+<app-navbar></app-navbar>
+
+<div
+  [@admin]="getState(o)"
+  [@register-admin]="getState(o)"
+  [@users]="getState(o)"
+>
+<router-outlet #o="outlet" > </router-outlet>
+</div>

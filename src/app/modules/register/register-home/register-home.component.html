@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="overlay-panel overlay-right">
+        <div class="row align-items-md-stretch text-center">
+            <h1>REGISTRO</h1>
+            <hr>
+            <div class="row-6 text-center">
+                <img [src]="imgDtr"
+                        (mouseout)="imgDtr = '/assets/logos/doctor.png'"
+                        class="img-responsive" 
+                        style="width: 80%;"
+                        routerLink="./doctor">
+                        <p>Doctor</p>               
+            </div>
+            <div class="row-6 text-center">
+                <img [src]="imgPct"
+                        (mouseout)="imgPct = '/assets/logos/patient.png'"
+                        class="img-responsive" 
+                        style="width: 80%;"
+                        routerLink="./patient">  
+                        <p>Paciente</p>
+            </div>
+        </div>
+    </div>
+    <div class="overlay-panel overlay-left">
+        <img src='/assets/common/register.png' class="img-responsive" style="width: 100%;">
+        <h1>Bienvenido</h1>
+        <p>
+            Si ya tiene una cuenta <br>
+            Haga click en el boton de abajo para iniciar sesion
+        </p>
+        <button type="button" class="btn btn-outline-light" routerLink="/">Iniciar sesión</button>
+    </div>
+</div>

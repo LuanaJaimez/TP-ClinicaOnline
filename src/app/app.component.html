@@ -1,0 +1,14 @@
+<app-spinner></app-spinner>
+
+<div
+  [@admin]="getState(o)"
+  [@doctor]="getState(o)"
+  [@patient]="getState(o)"
+  [@not-found]="getState(o)"
+  [@verification]="getState(o)"
+>
+  <router-outlet #o="outlet" > </router-outlet>
+</div>
+
+
+  

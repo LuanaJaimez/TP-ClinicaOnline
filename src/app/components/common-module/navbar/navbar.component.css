@@ -1,0 +1,12 @@
+.btn {
+    border-radius: 20px;
+    padding: 10px 30px;
+}
+
+.navbar {
+    background-color: whitesmoke;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+    0 10px 10px rgba(0,0,0,0.22);
+    height: 64px;
+    padding: 0 30px;
+}

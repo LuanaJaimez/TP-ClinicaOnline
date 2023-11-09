@@ -1,0 +1,21 @@
+.modal-content {
+    color:black;
+}
+
+.day{
+    margin: 5px;
+    width: 100%;
+}
+
+.time{
+    margin: 9px;
+}
+
+button {
+    margin: 5px;
+}
+
+.btn {
+    width: 100%;
+    margin: 5px;
+}
