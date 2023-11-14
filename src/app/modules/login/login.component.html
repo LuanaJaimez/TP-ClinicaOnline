@@ -51,29 +51,52 @@
             <button class="btn btn-primary form-control" type="submit" [disabled]="!form.valid"> Ingresar </button>              
         </div>
     </form>
-    <hr>
+    <hr> 
     <h3>Acceso rapido</h3>
-    <div class="row align-items-md-stretch">
-      <div class="brightness col text-center">
-        <img src='/assets/logos/admin.png' 
-              class="img-responsive" 
-              style="width: 100%;"
-              (click)="fillFormAdmin()">
-              <p>Admin</p>
-      </div>
-      <div class="brightness col text-center">
-        <img src='/assets/logos/patient.png' 
-              class="img-responsive" 
-              style="width: 100%;"
-              (click)="fillFormPatient()">
-              <p>Paciente</p>
-      </div>
-      <div class="brightness col text-center">
-        <img src='/assets/logos/doctor.png' 
-              class="img-responsive" 
-              style="width: 100%;"
-              (click)="fillFormDoctor()">
-              <p>Doctor</p>
+    <div>
+      <div class="row align-items-md-stretch">
+        <div class="brightness col text-center">
+          <img src="https://firebasestorage.googleapis.com/v0/b/tp-clinica-labo4.appspot.com/o/profile-pictures%2Fvezihiwecoi-admin%40yopmail.com%2F1700000016265?alt=media&token=e83dd7ed-0c10-49d9-9fed-3d76acce0c24" 
+                class="aspect-ratio-1-1"
+                style="width: 100%;"
+                (click)="fillFormAdmin()">
+                <p>Admin</p>
+        </div>
+        <div class="brightness col text-center">
+          <img src="https://firebasestorage.googleapis.com/v0/b/tp-clinica-labo4.appspot.com/o/profile-pictures%2Fvezihiwecoi-patient1%40yopmail.com%2F1699999333827?alt=media&token=d19bd384-2968-4678-9d7c-f9c6791f4e91" 
+                class="aspect-ratio-1-1" 
+                style="width: 100%;"
+                (click)="fillFormPatient1()">
+                <p>Paciente</p>
+        </div>
+        <div class="brightness col text-center">
+          <img src="https://firebasestorage.googleapis.com/v0/b/tp-clinica-labo4.appspot.com/o/profile-pictures%2Fvezihiwecoi-patient2%40yopmail.com%2F1699999422553?alt=media&token=56a99d97-e4d7-4570-9530-b704eda3a800" 
+                class="aspect-ratio-1-1" 
+                style="width: 100%;"
+                (click)="fillFormPatient2()">
+                <p>Paciente</p>
+        </div>
+        <div class="brightness col text-center">
+          <img src="https://firebasestorage.googleapis.com/v0/b/tp-clinica-labo4.appspot.com/o/profile-pictures%2Fvezihiwecoi-patient3%40yopmail.com%2F1699999509598?alt=media&token=11efb69a-d509-479a-9307-32e104046780" 
+                class="aspect-ratio-1-1" 
+                style="width: 100%;"
+                (click)="fillFormPatient3()">
+                <p>Paciente</p>
+        </div>
+        <div class="brightness col text-center">
+          <img src="https://firebasestorage.googleapis.com/v0/b/tp-clinica-labo4.appspot.com/o/profile-pictures%2Fvezihiwecoi-doctor1%40yopmail.com%2F1699999184489?alt=media&token=9db6351c-03e8-49f3-a01c-cacde1f6409d" 
+                class="aspect-ratio-1-1" 
+                style="width: 100%;"
+                (click)="fillFormDoctor1()">
+                <p>Doctor</p>
+        </div>
+        <div class="brightness col text-center">
+          <img src="https://firebasestorage.googleapis.com/v0/b/tp-clinica-labo4.appspot.com/o/profile-pictures%2Fvezihiwecoi-doctor2%40yopmail.com%2F1699921250469?alt=media&token=d02583bb-f081-4f5f-bb95-57c8cef0081d" 
+                class="aspect-ratio-1-1" 
+                style="width: 100%;"
+                (click)="fillFormDoctor2()">
+                <p>Doctor</p>
+        </div>
       </div>
     </div>
     <br>

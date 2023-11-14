@@ -3,26 +3,26 @@
         <div class="row align-items-md-stretch text-center">
             <h1>REGISTRO</h1>
             <hr>
-            <div class="row-6 text-center">
+            <div class="aspect-ratio-1-1">
                 <img [src]="imgDtr"
-                        (mouseout)="imgDtr = '/assets/logos/doctor.png'"
-                        class="img-responsive" 
-                        style="width: 80%;"
+                        (mouseout)="imgDtr = '/assets/logos/reg-doctor.png'"
+                        style="width: 100%;"
+                        class="pic"
                         routerLink="./doctor">
-                        <p>Doctor</p>               
+                        <p>Doctor</p> 
             </div>
-            <div class="row-6 text-center">
+            <div class="aspect-ratio-1-1">
                 <img [src]="imgPct"
-                        (mouseout)="imgPct = '/assets/logos/patient.png'"
-                        class="img-responsive" 
-                        style="width: 80%;"
+                        (mouseout)="imgPct = '/assets/logos/reg-patient.png'"
+                        style="width: 100%;"
+                        class="pic"
                         routerLink="./patient">  
                         <p>Paciente</p>
             </div>
         </div>
     </div>
     <div class="overlay-panel overlay-left">
-        <img src='/assets/common/register.png' class="img-responsive" style="width: 100%;">
+        <img src='/assets/common/register.png' class="img-responsive" style="width: 80%;">
         <h1>Bienvenido</h1>
         <p>
             Si ya tiene una cuenta <br>

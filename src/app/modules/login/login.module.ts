@@ -7,6 +7,8 @@ import { MatInputModule } from '@angular/material/input';
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProfileComponent } from 'src/app/components/common-module/profile/profile.component';
+import { SharedModule } from 'src/app/components/common-module/common.module';
 
 
 @NgModule({
@@ -20,6 +22,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatInputModule,
     MatFormFieldModule,
     MatButtonModule,
+    SharedModule
   ]
 })
 export class LoginModule { }

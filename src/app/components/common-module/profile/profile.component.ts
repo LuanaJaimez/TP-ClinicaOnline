@@ -30,7 +30,7 @@ export class ProfileComponent implements OnInit {
     })
     .finally(() => {
       this.spinnerService.hide();
-    });    
+    });
   }
 
   removeDuplicates(arr: any) {

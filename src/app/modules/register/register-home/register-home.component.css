@@ -25,9 +25,9 @@ button {
 			0 10px 10px rgba(0,0,0,0.22);
 	position: relative;
 	overflow: hidden;
-	width: 770px;
+	width: 1200px;
 	max-width: 100%;
-	min-height: 600px;
+	min-height: 800px;
 }
 
 .overlay-panel {
@@ -57,10 +57,23 @@ p {
 .overlay-left {
 	transform: translateX(-20%);
   background-color: #bbd0ee;
-  left: 60px
+  left: 80px
 }
 
 .overlay-right {
 	right: 0;
 	transform: translateX(0);
+}
+
+.aspect-ratio-1-1 {
+	padding: 5px;
+	margin: 15px;
+	display: inline-block;
+	width: 200px;
+	text-align: center;
+}
+
+.pic{
+	border: 3px solid #1865c1;
+	background-color: #bbd0ee;;
 }

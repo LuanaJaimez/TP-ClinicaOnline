@@ -1,4 +1,4 @@
-<div *ngIf="this.userData as user">
+<div *ngIf="userData as user">
     <div class="col">
         <img class="img-thumbnail img-fluid"
             src="{{(user.photoURL) ? user.photoURL : '/assets/common/profile-user.png'}}" alt="{{user.displayName}}">

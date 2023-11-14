@@ -81,6 +81,24 @@ export class FirestoreService {
       });    
   }
 
+  getUserDataPic(email: any) {
+    var data: firebase.firestore.DocumentData;
+    return firebase
+      .firestore()
+      .collection('users')
+      .where('email', '==', email)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          data = doc.data();
+        });
+        return data;
+      })
+      .catch((error) => {
+        console.log('Error getting documents: ', error);
+      });    
+  }
+
   getAllUsers() {
     return this.afs.collection('users').valueChanges();
   }

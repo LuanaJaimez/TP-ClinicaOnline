@@ -26,9 +26,9 @@
         0 10px 10px rgba(0,0,0,0.22);
     position: relative;
     overflow: hidden;
-    width: 1200px;
+    width: 1500px;
     max-width: 100%;
-    min-height: 700px;
+    min-height: 800px;
   }
   
   .overlay-panel {
@@ -57,11 +57,20 @@
   
   .overlay-left {
     transform: translateX(-20%);
-    left: 100px
+    left: 140px
   }
   
   .overlay-right {
     right: 0;
     background-color: #bbd0ee;
     transform: translateX(0);
+  }
+
+  .aspect-ratio-1-1 {
+    object-fit: cover;
+    object-position: center;
+    width: 220px;
+    height: 100px;
+    padding: 8px;
+    border: 1px solid #1865c1;
   }
