@@ -1,0 +1,20 @@
+<div *ngIf="this.approved == false; else elseBlock">
+    <div class="container2">
+        <h1>Usuario inhabilitados. Por favor, espere a que el administrador habilite su usuario</h1>
+    </div>
+</div>
+
+<ng-template #elseBlock>
+    <div class="container">
+        <app-my-appointments></app-my-appointments>         
+    </div>
+</ng-template>
+
+  
+  
+  
+  
+  
+  
+  
+  

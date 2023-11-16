@@ -1,6 +1,8 @@
 <app-navbar></app-navbar>
 <div
   [@patient]="getState(o)"
+  [@request-appointment-patient]="getState(o)"
+  [@patient-own-appointment]="getState(o)"
 >
   <router-outlet #o="outlet" > </router-outlet>
 </div>

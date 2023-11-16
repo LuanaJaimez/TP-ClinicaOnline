@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./doctor-dashboard.component.css'],
   animations: [
     trigger('doctor', [transition('* => doctor', [style({ opacity: 0 }), animate(2000)])]),
-    trigger('patients', [transition('* => patients', [style({ opacity: 0 }), animate(2000)])])
+    trigger('patients', [transition('* => patients', [style({ opacity: 0 }), animate(2000)])]),
+    trigger('doctor-patient-appointments', [transition('* => doctor-patient-appointments', [style({ opacity: 0 }), animate(2000)])])
   ]
 })
 export class DoctorDashboardComponent implements OnInit {

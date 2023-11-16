@@ -1,0 +1,202 @@
+<br>
+<h1>MIS TURNOS</h1>
+<br>
+<div class="d-flex justify-content-center">
+    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#specialtyModal">
+        Filtrar por especialidad
+    </button>
+    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#specialistModal">
+        Filtrar por paciente
+    </button>
+</div>
+<hr>
+<div *ngIf="appointments?.length > 0; else elseBlock">
+
+    <div *ngIf="this.appointments as appointments; else elseBlock">
+        <table class="table table-hover text-center">
+            <thead>
+                <tr>
+                    <th scope="col">Nombre paciente</th>
+                    <th scope="col">Especialidad</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Estado</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let appointment of appointments; let i=index">
+                    <td class="align-middle">{{appointment.patient }}</td>
+                    <td class="align-middle">{{appointment.specialty}}</td>
+                    <td class="align-middle">{{appointment.date}}</td>
+                    <td class="align-middle">
+                        <label class="btn info"><h3> {{appointment.status}} </h3></label>
+                    </td>
+
+                    <td class="align-middle" *ngIf="appointment.status == 'pending'">
+                        <button type="button" class="btn grennS" (click)="acceptAppointment(appointment.uid, 'accepted')">Aceptar</button>
+                    </td>
+
+                    <td class="align-middle" *ngIf="appointment.status == 'accepted'">
+                        <button type="button" class="btn grennS" data-bs-toggle="modal" data-bs-target="#closeAppointmentModal" (click)="openCloseAppointment(appointment.uid, 'closed' )">Finalizar</button>
+                    </td>                    
+
+                    <td class="align-middle" *ngIf="appointment.status == 'pending'">
+                        <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#cancelModal" (click)="openCancelOrRejectAppointment(appointment.uid, 'canceled')">Cancelar</button>
+                    </td> 
+                    
+                    <td class="align-middle" *ngIf="appointment.status == 'pending'">
+                        <button type="button" class="btn redC" data-bs-toggle="modal" data-bs-target="#cancelModal" (click)="openCancelOrRejectAppointment(appointment.uid, 'rejected')">Rechazar</button>
+                    </td> 
+
+                   <td class="align-middle" *ngIf="appointment.status == 'canceled' || appointment.status == 'rejected' || appointment.status == 'closed'">
+                        <button type="button" class="btn yellowC" data-bs-toggle="modal" data-bs-target="#infoModal" (click)="openInfoAppointment(appointment.uid)">
+                            Ver
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<ng-template #elseBlock>
+    <label class="filtrados"><h2>No hay turnos filtrados</h2></label>
+</ng-template>
+
+
+<div class="modal fade" id="specialtyModal" tabindex="-1" aria-labelledby="specialtyModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h1>Especialidades</h1>
+                <div *ngIf="specialtiesList?.length > 0; else elseBlockSpecialties">
+                    <div *ngFor="let specialty  of specialtiesList; let i=index">
+                        <input type="radio" name="specialty" class="btn-check" id={{specialty}} autocomplete="off"
+                            [value]="specialty" (click)="selectSpecialty($event)" data-bs-dismiss="modal" />
+
+                        <label class="btn btn-dark" for={{specialty}}>
+                            <div class="d-flex align-items-center justify-content-between">
+                                {{specialty}}
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <ng-template #elseBlockSpecialties>
+                    <label class="filtrados"><h2>No hay turnos de esa especialidad para mostrar</h2></label>
+                </ng-template>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="specialistModal" tabindex="-1" aria-labelledby="specialistModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h1>Pacientes</h1>
+                <div *ngIf="patientsBySpecialist?.length > 0; else elseBlockPatients">
+                    <div *ngFor="let patient  of patientsBySpecialist; let i=index">
+                        <input type="radio" name="patient" class="btn-check" id={{patient.displayName}} autocomplete="off"
+                            [value]="patient.displayName" (click)="selectDoctor($event)"
+                            data-bs-dismiss="modal"/>
+                
+                        <label class="btn btn-dark" for={{patient.displayName}}>
+                            <div class="d-flex align-items-center justify-content-between">
+                                {{patient.displayName}}
+                                <img class="img-fluid" src="{{(patient.photoURL) ? patient.photoURL : '/assets/common/profile-user.png'}}"
+                                alt="{{patient.displayName}}" style="width: 15%">
+                            </div>                            
+                        </label>
+                    </div>
+                </div>
+                <ng-template #elseBlockPatients>
+                    <label class="filtrados"><h2>No hay turnos de ese paciente para mostrar</h2></label>
+                </ng-template>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="cancelModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h1>Cancelacion</h1>
+                <div class="form-group col-md-12">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Ingrese motivo de la cancelacion/rechazo"   [formControl]="cancelReason">
+                        <div class="input-group-append">
+                          <button class="btn btn-dark" type="button" (click)="cancelOrRejectAppointment()"  data-bs-dismiss="modal">Confirmar</button>
+                        </div>
+                      </div>                                    
+                </div>
+            </div>
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body text-left">
+                <h1>Informacion del turno</h1>
+                <p>Estado: {{appointmentStatus}}</p>
+                <p>Comentario: {{appointmentInfo}}</p> 
+                <div *ngIf="appointmentDiagnostic != ''"> 
+                    <p>Diagnostico: {{appointmentDiagnostic}}</p> 
+                </div>
+            </div>
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="closeAppointmentModal" tabindex="-1" aria-labelledby="closeAppointmentModal"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h1 class="text-center">Diagnostico</h1>
+                <div class="form-group col-md-12">
+                    <input type="text" class="form-control" placeholder="Ingrese comentario" [formControl]="comment">
+                    <br>
+                    <input type="text" class="form-control" placeholder="Ingrese diagnostico" [formControl]="diagnostic">                   
+                </div>
+                <br>
+                <div class="modal-footer text-center">
+                    <div class="row align-items-center">
+                        <div class="form-group col-md-6">
+                            <button class="btn btn-dark" type="button" data-bs-dismiss="modal" (click)="closeAppointment()"
+                                >Confirmar</button>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

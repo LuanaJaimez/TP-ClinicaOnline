@@ -1,0 +1,17 @@
+<h1 class="text-center">Especialidad</h1>
+<br>
+<div *ngIf="specialtiesList?.length > 0; else elseBlock">
+    <div *ngFor="let specialty  of specialtiesList; let i=index">
+        <input type="radio" name="specialty" class="btn-check" id={{specialty}} autocomplete="off" [value]="specialty"
+            (click)="selectSpecialty($event)" />
+
+        <label class="btn btn-outline-dark" for={{specialty}}>
+            <div class="d-flex align-items-center justify-content-center">
+                {{specialty}}
+            </div>
+        </label>
+    </div>
+</div>
+<ng-template #elseBlock>
+    <label class="info"><h3>No hay especialidades que mostrar</h3></label>
+</ng-template>

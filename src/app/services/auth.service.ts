@@ -53,9 +53,9 @@ export class AuthService {
       .finally(() => { });
   }
 
-  async login(email: string, password: string) {
+  login(email: string, password: string) {
     this.spinnerService.show();
-    return await signInWithEmailAndPassword(this.auth, email, password)
+    return signInWithEmailAndPassword(this.auth, email, password)
     .then(res => {
       if (res.user.emailVerified) {
         this.setLocalStorage();

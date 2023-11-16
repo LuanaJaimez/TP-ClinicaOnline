@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { reload } from 'firebase/auth';
 import { ToastrService } from 'ngx-toastr';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
@@ -33,6 +34,7 @@ export class AdminHomeComponent implements OnInit {
   disableUser(uid: any) {
     this.spinnerService.show();
     this.firestoreService.disableUser(uid).then(() => {
+      this.getUsersData();
       this.spinnerService.hide();
       this.toastr.success('Usuario deshabilitado correctamente');
     });
@@ -41,6 +43,7 @@ export class AdminHomeComponent implements OnInit {
   enableUser(uid: any) {
     this.spinnerService.show();
     this.firestoreService.enableUser(uid).then(() => {
+      this.getUsersData();
       this.spinnerService.hide();
       this.toastr.success('Usuario habilitado correctamente');
     });

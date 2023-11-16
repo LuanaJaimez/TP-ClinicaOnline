@@ -5,19 +5,37 @@
 
             <ul class="navbar-nav mr-auto" *ngIf="user == 'Admin'">
                 <li class="nav-item" >
+                    <a class="nav-link active" aria-current="page" routerLink="admin-home">Habilitacion</a>
+                </li>
+                <li class="nav-item" >
                     <a class="nav-link active" aria-current="page" routerLink="register-admin">Alta administrador</a>
                 </li>
                 <li class="nav-item" >
                     <a class="nav-link active" aria-current="page" routerLink="users">Ver usuarios</a>
                 </li>
-            </ul>
-
-            <ul class="navbar-nav mr-auto" *ngIf="user == 'Patient'">
+                <li class="nav-item" >
+                    <a class="nav-link active" aria-current="page" routerLink="request-appointment-admin">Sacar turno</a>
+                </li>
+                <li class="nav-item" >
+                    <a class="nav-link active" aria-current="page" routerLink="appointments">Ver turnos</a>
+                </li>
             </ul>
             
             <ul class="navbar-nav mr-auto" *ngIf="user == 'Doctor'">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" routerLink="patients">Pacientes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" routerLink="doctor-patient-appointments">Turnos</a>
+                </li>
+            </ul>
+           
+            <ul class="navbar-nav mr-auto" *ngIf="user == 'Patient'">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" routerLink="request-appointment-patient">Sacar turno</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" routerLink="patient-own-appointment">Mis turnos</a>
                 </li>
             </ul>
         </div>

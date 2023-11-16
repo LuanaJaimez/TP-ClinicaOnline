@@ -10,6 +10,14 @@ import { CaptchaComponent } from './captcha/captcha.component';
 import { UserNamePipe } from 'src/app/pipes/userrName.pipe';
 import { CaptchaDirective } from 'src/app/directives/captcha.directive';
 import { ChartistModule } from "ng-chartist";
+import { RequestAppointmentComponent } from './request-appointment/request-appointment.component';
+import { ServiceHoursPipe } from 'src/app/pipes/serviceHours.pipe';
+import { SpecialtiesPipe } from 'src/app/pipes/specialties.pipe';
+import { AppointmentStatusPipe } from 'src/app/pipes/appointmentStatus.pipe';
+import { RequestAppointmentSpecialtyComponent } from './request-appointment-specialty/request-appointment-specialty.component';
+import { RequestAppointmentDoctorComponent } from './request-appointment-doctor/request-appointment-doctor.component';
+import { RequestAppointmentDateComponent } from './request-appointment-date/request-appointment-date.component';
+import { RequestAppointmentPatientComponent } from './request-appointment-patient/request-appointment-patient.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +27,15 @@ import { ChartistModule } from "ng-chartist";
     UserTypePipe,
     UserNamePipe,
     CaptchaDirective, 
-    CaptchaComponent
+    CaptchaComponent,
+    RequestAppointmentComponent,
+    ServiceHoursPipe,
+    SpecialtiesPipe,
+    AppointmentStatusPipe,
+    RequestAppointmentSpecialtyComponent,
+    RequestAppointmentDoctorComponent,
+    RequestAppointmentDateComponent,
+    RequestAppointmentPatientComponent,
   ],
   imports: [
     CommonModule,
@@ -35,9 +51,12 @@ import { ChartistModule } from "ng-chartist";
     UserNamePipe,
     UserTypePipe,
     CaptchaDirective,
-    ChartistModule   
+    ChartistModule,
+    RequestAppointmentComponent,
+    AppointmentStatusPipe
   ],
   providers: [
+    SpecialtiesPipe
   ]
 })
 export class SharedModule { }

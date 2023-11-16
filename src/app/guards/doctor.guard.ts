@@ -35,18 +35,12 @@ export class DoctorGuard{
           if( role == 'Admin') {
             this.router.navigate(['/admin']);
             this.spinnerService.hide();
-            setTimeout(()=>{
-              this.toastr.error("Acceso denegado. No tiene permisos para acceder a esta página.");  
-            }, 5000);
             return false;
           }
           
           if( role == 'Patient') {
             this.router.navigate(['/patient']); 
             this.spinnerService.hide();
-            setTimeout(()=>{
-              this.toastr.error("Acceso denegado. No tiene permisos para acceder a esta página.");  
-            }, 5000);
             return false;      
           }
     

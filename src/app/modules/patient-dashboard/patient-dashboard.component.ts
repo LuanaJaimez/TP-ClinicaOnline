@@ -6,7 +6,9 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './patient-dashboard.component.html',
   styleUrls: ['./patient-dashboard.component.css'],
   animations: [
-    trigger('patient', [transition('* => patient', [style({ opacity: 0 }), animate(2000)])])
+    trigger('patient', [transition('* => patient', [style({ opacity: 0 }), animate(2000)])]),
+    trigger('request-appointment-patient', [transition('* => request-appointment-patient', [style({ opacity: 0 }), animate(2000)])]),
+    trigger('patient-own-appointment', [transition('* => patient-own-appointment', [style({ opacity: 0 }), animate(2000)])])
   ]
 })
 export class PatientDashboardComponent implements OnInit {

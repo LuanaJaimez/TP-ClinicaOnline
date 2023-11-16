@@ -28,21 +28,15 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  disableUser(uid: any) {
+  userStatus(uid: any, status:boolean){
     this.spinnerService.show();
-    this.firestoreService.disableUser(uid).then(() => {
-      this.getUsersData();
+    this.firestoreService.userStatus(uid, status).then(() => {
       this.spinnerService.hide();
+      if(status == true){
+      this.toastr.success('Usuario habilitado correctamente');}
+      else if(status == false){
       this.toastr.success('Usuario deshabilitado correctamente');
-    });
-  }  
-
-  enableUser(uid: any) {
-    this.spinnerService.show();
-    this.firestoreService.enableUser(uid).then(() => {
-      this.getUsersData();
-      this.spinnerService.hide();
-      this.toastr.success('Usuario habilitado correctamente');
+      }
     });
   }
 }

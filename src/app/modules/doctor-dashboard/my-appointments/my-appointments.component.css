@@ -1,0 +1,52 @@
+button {
+    margin: 5px;
+}
+
+.btn {
+    width: 100%;
+    margin: 5px;
+}
+
+.container {
+    margin-top: 100px;
+    background-color: whitesmoke;
+    border-radius: 10px;
+      box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+        0 10px 10px rgba(0,0,0,0.22);
+    position: relative;
+    overflow: hidden;
+    width: 300px;
+    max-width: 100%;
+    min-height: 400px;
+  }
+  
+.filtrados{
+    background-color: lightblue;
+    width: 100%;
+    text-align: center;
+  }
+
+.info{
+    background-color: lightblue;
+    border: 3px solid lightblue;
+    border-radius: 10px;
+}
+
+.grennS{
+    background-color: lightgreen;
+    border: 3px solid lightgreen;
+    border-radius: 10px;
+}
+
+.yellowC{
+    background-color: rgb(241, 241, 131);
+    border: 3px solid rgb(241, 241, 131);
+    border-radius: 10px;
+}
+
+.redC{
+    background-color: lightskyblue;
+    border: 3px solid lightskyblue;
+    border-radius: 10px;
+}
+

@@ -7,8 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-dashboard.component.css'],
   animations: [
     trigger('admin', [transition('* => admin', [style({ opacity: 0 }), animate(2000)])]),
+    trigger('home-admin', [transition('* => home-admin', [style({ opacity: 0 }), animate(2000)])]),
     trigger('register-admin', [transition('* => register-admin', [style({ opacity: 0 }), animate(2000)])]),
-    trigger('users', [transition('* => users', [style({ opacity: 0 }), animate(2000)])])
+    trigger('users', [transition('* => users', [style({ opacity: 0 }), animate(2000)])]),
+    trigger('appointments', [transition('* => appointments', [style({ opacity: 0 }), animate(2000)])]),
+    trigger('request-appointment-admin', [transition('* => request-appointment-admin', [style({ opacity: 0 }), animate(2000)])])
   ]
 })
 export class AdminDashboardComponent implements OnInit {
