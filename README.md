@@ -30,13 +30,13 @@ Pagina principal de perfil del Especialista
 Pagina principal de perfil del Paciente
 
 ### Turnos
-![ImgTurnosAdmin](./ImgReadme/turnosAdmin.PNG)
+![ImgTurnosAdmin](./ImgReadme/turnosAdmin.png)
 Todos los turnos pueden visualizarse ingresando como Admin
 
-![ImgTurnosDoc](./ImgReadme/turnosDoc.PNG)
+![ImgTurnosDoc](./ImgReadme/turnosDoc.png)
 Cada Especialista puede visualizar solo sus propios turnos
 
-![ImgTurnosPaciente](./ImgReadme/turnosPaciente.PNG)
+![ImgTurnosPaciente](./ImgReadme/turnosPaciente.png)
 Cada Paciente puede visualizar solo sus propios turnos
 
 
@@ -98,6 +98,6 @@ En esta seccion el paciente ve sus datos personales
 En esta seccion el paciente puede solicitar turnos medicos. Debe seleccionar alguna de las especialidades disponibles en la Clinica, al seleccionarla se le muestra los especialistas y sus turnos disponibles.
 
 ### Mis Turnos:
-![ImgTurnosPaciente](./ImgReadme/turnosPaciente.PNG)
+![ImgTurnosPaciente](./ImgReadme/turnosPaciente.png)
 En esta seccion el paciente ve todos sus turnos, los cuales puede cancelar en caso de ser necesario dejando un comentario del motivo. Tambien, al finalizar el mismo se le da la opcion de calificar la atencion del especialista y de ver la reseña del turno.
 Tiene un filtro que le permite buscar por cualquier campo del Turno.
