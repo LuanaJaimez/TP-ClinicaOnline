@@ -13,7 +13,6 @@ import { StorageService } from 'src/app/services/storage.service';
 export class RequestAppointmentDoctorComponent implements OnInit {
 
   doctors: any;
-  @Input() specialty = '';
   @Output() selectedDoctorEvent = new EventEmitter<string>();
 
   constructor(private toastr: ToastrService,
@@ -23,16 +22,16 @@ export class RequestAppointmentDoctorComponent implements OnInit {
               public storage: StorageService) { }
 
   ngOnInit(): void {
+    this.getSpecialists();
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    this.specialty = changes['specialty'].currentValue;
+  getSpecialists() {
     this.spinnerService.show();
-    this.firestore.getDoctorsBySpecialtyAndEnabled(this.specialty).then((data) => {
+    this.firestore.getAllEnabledSpecialists().then((data:any) => {
       this.doctors = data;
       this.spinnerService.hide();
-    });    
-  }  
+    });
+  }
 
   selectDoctor(e: any) {
     this.selectedDoctorEvent.emit(e.target.value);

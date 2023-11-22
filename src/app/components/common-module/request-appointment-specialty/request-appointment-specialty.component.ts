@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
@@ -13,6 +13,7 @@ import { StorageService } from 'src/app/services/storage.service';
 export class RequestAppointmentSpecialtyComponent implements OnInit {
 
   specialtiesList: any;
+  @Input() doctor = '';
   @Output() selectedSpecialtyEvent = new EventEmitter<string>();
 
 
@@ -23,16 +24,16 @@ export class RequestAppointmentSpecialtyComponent implements OnInit {
               public storage: StorageService) { }
 
   ngOnInit(): void {
-    this.getSpecialties();
   }
 
-  getSpecialties() {
+  ngOnChanges(changes: SimpleChanges) {
+    this.doctor = changes['doctor'].currentValue;
     this.spinnerService.show();
-    this.firestore.getSpecialties().then((data:any) => {
-      this.specialtiesList = data[0].specialties;
+    this.firestore.getSpecialtiesByDoctor(this.doctor).then((data) => {
+      this.specialtiesList = data;
       this.spinnerService.hide();
-    });
-  }
+    });    
+  } 
 
   selectSpecialty(e: any) {
     this.selectedSpecialtyEvent.emit(e.target.value);

@@ -103,10 +103,6 @@
                                 </div>
                             </div>
                             <hr>
-                            <label style="float: left">Captcha</label>
-                            <br>
-                            <app-captcha (captchaResult)="captchaResult($event)"></app-captcha>
-                            <hr>
                             <div class="col">
                                 <button class="btn btn-dark form-control" (click)="registerPatient()" [disabled]="!form.valid">Registrar</button>
                                 <button class="btn btn-outline-danger form-control" routerLink="/register">Volver</button>

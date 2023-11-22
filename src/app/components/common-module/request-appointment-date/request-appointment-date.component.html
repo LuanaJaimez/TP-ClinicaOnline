@@ -1,19 +1,21 @@
 <h1 class="text-center">Turno</h1>
 <br>
 <div *ngIf="appointments.length > 0; else elseBlock">
-    <div *ngFor="let appointment  of appointments; let i=index">
-        <input type="radio" name="appointment" class="btn-check" id={{appointment}} autocomplete="off"
-            [value]="appointment"  (click)="selectApointment($event)" />
+    <div *ngIf="specialty !== ''; else elseBlock">
+        <div *ngFor="let appointment of appointments; let i=index">
+            <input type="radio" name="appointment" class="btn-check" id={{appointment}} autocomplete="off"
+                [value]="appointment"  (click)="selectApointment($event)" />
 
-        <label class="btn btn-outline-dark" for={{appointment}} data-bs-toggle="modal" data-bs-target="#exampleModal">
-            <div class="d-flex align-items-center justify-content-between">
-                {{appointment}}                
-            </div>
-        </label>
+            <label class="btn btn-outline-dark" for={{appointment}} data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <div class="d-flex align-items-center justify-content-between">
+                    {{appointment | date:'yyyy-MM-dd h:mm a'}}                
+                </div>
+            </label>
+        </div>
     </div>
 </div>
 <ng-template #elseBlock>
-    <label class="info"><h3>No hay turnos para mostrar</h3></label>
+    <label class="info"><h3>No se selecciono una especialidad o no hay turnos para mostrar</h3></label>
 </ng-template>
 
 

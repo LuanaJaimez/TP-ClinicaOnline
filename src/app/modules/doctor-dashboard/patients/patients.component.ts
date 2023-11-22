@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import jsPDF from 'jspdf';
+import { SpecialtiesPipe } from 'src/app/pipes/specialties.pipe';
 import { AuthService } from 'src/app/services/auth.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
@@ -17,8 +19,8 @@ export class PatientsComponent implements OnInit {
   patients: any;
   user: any;
   userData: any;
-  patientMedicalHistory: any;
   patientAppointments: any;
+  patientMedicalHistory: any;
 
   constructor(public auth: AuthService,
               public firestore: FirestoreService,
@@ -82,5 +84,74 @@ export class PatientsComponent implements OnInit {
   removeDuplicates(arr: any) {
     return arr.filter((item: any,
         index: any) => arr.indexOf(item) === index);
+  }
+
+  openMedicalHistory(patient: any){
+    this.firestore
+    .getMedicalHistoryByPatient(      
+      patient
+    )
+    .then((data) => {
+      this.patientMedicalHistory = data; 
+      console.log(this.patientMedicalHistory);        
+    })
+    .then(() => {
+      this.firestore
+      .getMedicalHistoryBySpecialistAndPatient(
+        this.userData.displayName,      
+        patient
+      )
+      .then((data) => {
+        this.patientAppointments = data; 
+      })
+      .then(() => {
+      })      
+    })       
+  }
+
+  download() {
+      var today  = new Date();
+      var line = 20;
+      today.toLocaleDateString("es-ES")
+      let PDF = new jsPDF('p', 'mm', 'a4');
+      let pageHeight= (PDF.internal.pageSize.height)-10;
+      
+      PDF.addImage('../../../assets/common/logo.png', 'PNG', 150, 10,50,50);
+      PDF.text(`Fecha de creacion: ${today.toLocaleDateString("es-ES")}`, 10,line);
+      (line > pageHeight) ? (PDF.addPage(), line = 20) : line += 10;
+      PDF.text(`Historia clínica de ${this.patientMedicalHistory.patient}`, 10,line);
+      (line > pageHeight) ? (PDF.addPage(), line = 20) : line += 10;
+      PDF.text(`-Datos ultimo control:`,10,line);
+      (line > pageHeight) ? (PDF.addPage(), line = 20) : line += 10;
+      PDF.text(`* Altura: ${this.patientMedicalHistory.height} cm`,15,line);
+      (line > pageHeight) ? (PDF.addPage(), line = 20) : line += 10;
+      PDF.text(`* Peso: ${this.patientMedicalHistory.weight} kgs`,15,line);
+      (line > pageHeight) ? (PDF.addPage(), line = 20) : line += 10;
+      PDF.text(`* Temperatura: ${this.patientMedicalHistory.temp} ºC`,15,line);
+      (line > pageHeight) ? (PDF.addPage(), line = 20) : line += 10;
+      PDF.text(`* Presión: ${this.patientMedicalHistory.pressure} (media)`,15,line);
+      (line > pageHeight) ? (PDF.addPage(), line = 20) : line += 10;
+      PDF.text(`- Historial de atencion con el especialista: ${this.patientAppointments[0].doctor}`,10,line);
+      (line > pageHeight) ? (PDF.addPage(), line = 20) : line += 10;
+      this.patientAppointments.forEach((element: { specialty: any; date: any; diagnosis: any; observations: { [x: string]: any; }; appointmentInfo: any; }) => {
+        PDF.text(`----------------------------------------------------------------------`,15,line);
+        (line > pageHeight) ? (PDF.addPage(), line = 20) : line += 10;
+        PDF.text(`* Fecha: ${element.date}`,15,line);
+        (line > pageHeight) ? (PDF.addPage(), line = 20) : line += 10;
+        PDF.text(`* Especialidad: ${element.specialty}`,15,line);
+        (line > pageHeight) ? (PDF.addPage(), line = 20) : line += 10;
+        PDF.text(`* Diagnostico: ${element.diagnosis}`,15,line);
+        (line > pageHeight) ? (PDF.addPage(), line = 20) : line += 10;
+        PDF.text(`* Observaciones:`,15,line);
+        (line > pageHeight) ? (PDF.addPage(), line = 20) : line += 10;
+        for (var key in element.observations) {
+          PDF.text(`* ${key}: ${element.observations[key]}`,20,line);
+          (line > pageHeight) ? (PDF.addPage(), line = 20) : line += 10;
+        }
+        PDF.text(`* Comentario de ${element.appointmentInfo}`,15,line, {maxWidth: 160 });
+        (line > pageHeight) ? (PDF.addPage(), line = 20) : line += 10;
+      });             
+         
+      PDF.save('historia-clinica'+ '-' + this.patientMedicalHistory.patient + '.pdf');    
   }
 }

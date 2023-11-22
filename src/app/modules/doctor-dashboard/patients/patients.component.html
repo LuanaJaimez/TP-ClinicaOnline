@@ -18,6 +18,8 @@
                                 <li >{{patient.appointmentDates[1]}}</li>
                                 <li >{{patient.appointmentDates[2]}}</li>
                             </ul>
+                            <br>
+                            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#medicalHistoryModal" (click)="openMedicalHistory(patient.displayName)">Historia clinica</button>
                         </div>
                     </div>
                 </div>
@@ -26,5 +28,53 @@
         <ng-template #elseBlock>
             <label class="btn btn-outline-danger">No hay pacientes que mostrar</label>
         </ng-template>
+    </div>
+</div>
+
+<div class="modal fade" id="medicalHistoryModal" tabindex="-1" aria-labelledby="medicalHistoryModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div *ngIf="patientMedicalHistory != undefined ; else elseBlockMedicalHistory">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3>Historia clinica del paciente {{patientMedicalHistory.patient}}</h3>
+                        <a class="btn btn-dark" (click)="download()">Descargar</a>
+                    </div>
+                    <hr>
+                    <div>
+                        <h4>Informacion de la ultima cita</h4>
+                        <ul>
+                            <li>Altura: {{patientMedicalHistory.height}} cm..</li>
+                            <li>Peso: {{patientMedicalHistory.weight}} kg.</li>
+                            <li>Temperatura: {{patientMedicalHistory.temp}}°C</li>
+                            <li>Presion: {{patientMedicalHistory.pressure}} (media)</li>
+                        </ul>
+                    </div>
+                    <hr>
+                    <p>Historial de atencion con el especialista {{userData.displayName}}</p>
+                    <div *ngFor="let appointment  of patientAppointments; let i=index">
+                        <hr>
+                        <ul>
+                            <li>Fecha: {{appointment.date}}</li>
+                            <li>Especialidad: {{appointment.specialty | specialties}}</li>
+                            <li>Diagnostico: {{appointment.diagnosis}}</li>
+                            <li>Observaciones: </li>
+                                <ul>
+                                    <li *ngFor="let info of appointment.observations | keyvalue">
+                                        {{info.key}}: {{info.value}}
+                                    </li>
+                                </ul>
+                            <li>Comentario de {{appointment.appointmentInfo}}</li>
+                        </ul>
+                    </div>
+                </div>
+                <ng-template #elseBlockMedicalHistory>
+                    <label class="btn btn-outline-danger">No hay historia clinica para mostrar</label>
+                </ng-template>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
     </div>
 </div>

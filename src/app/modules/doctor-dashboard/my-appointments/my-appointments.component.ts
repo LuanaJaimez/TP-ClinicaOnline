@@ -268,9 +268,36 @@ export class MyAppointmentsComponent implements OnInit {
         this.userData.displayName +
         ': ' +
         this.comment.value;
+
+        var appointmentUID = this.appointmentUID.split('-');
+        var patient = appointmentUID[3];
+  
+        this.saveAppointmentMedicalHistory(
+          patient,
+          this.height.value,
+          this.weight.value,
+          this.temp.value,
+          this.pressure.value
+        );
       
       this.saveAppointmentComment(comment);
     }
+  }
+
+  saveAppointmentMedicalHistory(
+    patient: any,
+    height: any,
+    weight: any,
+    temp: any,
+    pressure: any
+  ) {
+    this.firestore.addMedicalHistory(
+      patient,
+      height,
+      weight,
+      temp,
+      pressure,
+    );    
   }
 
   saveAppointmentComment(comment: any) {

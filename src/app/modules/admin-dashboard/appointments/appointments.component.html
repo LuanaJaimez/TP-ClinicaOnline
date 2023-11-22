@@ -39,7 +39,7 @@
 
                                     <td class="align-middle">{{appointment.date}}</td>
                                     <td class="align-middle">
-                                        <label class="btn info">{{appointment.status}}</label>
+                                        <label class="btn info">{{appointment.status | appointmentStatus}}</label>
                                     </td>
                                     <td class="align-middle" *ngIf="appointment.status == 'pending'">
                                         <button type="button" class="btn btn-dark" data-bs-toggle="modal"
@@ -142,10 +142,10 @@
                 <div class="form-group col-md-12">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Ingrese motivo de la cancelacion/rechazo"   [formControl]="cancelReason">
-                        <div class="input-group-append">
-                          <button class="btn btn-dark" type="button" (click)="cancelAppointment()"  data-bs-dismiss="modal">Confirmar</button>
-                        </div>
-                      </div>                                    
+                    </div>   
+                    <div class="input-group-append">
+                        <button class="btn btn-dark" type="button" (click)="cancelAppointment()"  data-bs-dismiss="modal">Confirmar</button>
+                    </div>                                 
                 </div>
             </div>
             <div class="modal-footer text-center">
@@ -161,7 +161,7 @@
         <div class="modal-content">
             <div class="modal-body text-left">
                 <h1>Informacion del turno</h1>
-                <p>Estado: {{appointmentStatus}}</p>
+                <p>Estado: {{appointmentStatus | appointmentStatus}}</p>
                 <p>Comentario: {{appointmentInfo}}</p> 
                 <div *ngIf="appointmentDiagnostic != ''"> 
                     <p>Diagnostico: {{appointmentDiagnostic}}</p> 

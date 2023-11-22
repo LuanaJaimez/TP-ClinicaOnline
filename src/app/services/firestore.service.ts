@@ -232,6 +232,25 @@ export class FirestoreService {
       });
   }
 
+  getAllEnabledSpecialists() {
+    const data: any[] = [];
+    return firebase
+      .firestore()
+      .collection('users')
+      .where('role', '==', 'Doctor')
+      .where('approved', '==', true)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          data.push(doc.data());
+        });
+        return data;
+      })
+      .catch((error) => {
+        console.log('Error getting documents: ', error);
+      });
+  }
+
   getSpecialties() {
     const data: any[] = [];
     return firebase
@@ -273,7 +292,7 @@ export class FirestoreService {
     return firebase
       .firestore()
       .collection('users')
-      .where('uid', '==', uid)
+      .where('uid', '==', uid || '')
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -360,7 +379,7 @@ export class FirestoreService {
     return firebase
       .firestore()
       .collection('users')
-      .where('uid', '==', uid || '')
+      .where('uid', '==', uid)
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -378,7 +397,7 @@ export class FirestoreService {
     return firebase
       .firestore()
       .collection('appointments')
-      .where('doctor', '==', displayName || '')
+      .where('doctor', '==', displayName)
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -396,7 +415,7 @@ export class FirestoreService {
     return firebase
       .firestore()
       .collection('appointments')
-      .where('patient', '==', displayName || '')
+      .where('patient', '==', displayName)
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -414,8 +433,8 @@ export class FirestoreService {
     return firebase
       .firestore()
       .collection('appointments')
-      .where('specialty', '==', specialty || '')
-      .where('patient', '==', patient || '')
+      .where('specialty', '==', specialty)
+      .where('patient', '==', patient)
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -433,7 +452,7 @@ export class FirestoreService {
     return firebase
       .firestore()
       .collection('appointments')
-      .where('specialty', '==', specialty || '')
+      .where('specialty', '==', specialty)
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -451,7 +470,7 @@ export class FirestoreService {
     return firebase
       .firestore()
       .collection('appointments')
-      .where('doctor', '==', specialist || '')
+      .where('doctor', '==', specialist)
       .orderBy('date', 'asc')
       .get()
       .then((querySnapshot) => {
@@ -471,7 +490,7 @@ export class FirestoreService {
     return firebase
       .firestore()
       .collection('appointments')
-      .where('patient', '==', patient || '')
+      .where('patient', '==', patient)
       .orderBy('date', 'asc')
       .get()
       .then((querySnapshot) => {
@@ -490,8 +509,8 @@ export class FirestoreService {
     return firebase
       .firestore()
       .collection('appointments')
-      .where('specialty', '==', specialty || '')
-      .where('doctor', '==', doctor || '')
+      .where('specialty', '==', specialty)
+      .where('doctor', '==', doctor)
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -509,8 +528,8 @@ export class FirestoreService {
     return firebase
       .firestore()
       .collection('appointments')
-      .where('doctor', '==', specialist || '')
-      .where('patient', '==', patient || '')
+      .where('doctor', '==', specialist)
+      .where('patient', '==', patient)
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -534,7 +553,7 @@ export class FirestoreService {
     return firebase
       .firestore()
       .collection('appointments')
-      .where('uid', '==', uid || '')
+      .where('uid', '==', uid)
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -587,6 +606,86 @@ export class FirestoreService {
       })
       .catch((error) => {
         console.log('Error updating document: ', error);
+      });
+  }
+
+  async addMedicalHistory(
+    patient: any,
+    height: any,
+    weight: any,
+    temp: any,
+    pressure: any
+  ) {
+    let newAppointment: any = {
+      patient: patient,
+      height: height,
+      weight: weight,
+      temp: temp,
+      pressure: pressure,      
+    };
+    return await this.afs.collection('medical-history').doc(patient).set(newAppointment, {merge: true});
+  }  
+
+  getMedicalHistoryByPatient(patient: any) {
+    var data: any;
+    return firebase
+      .firestore()
+      .collection('medical-history')
+      .where('patient', '==', patient)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          data = doc.data();
+        });
+        console.log(data);
+        return data;
+      })
+      .catch((error) => {
+        console.log('Error getting documents: ', error);
+      });
+  }
+
+  getMedicalHistoryBySpecialistAndPatient(specialist: any, patient: any) {
+    const data: any[] = [];
+    return firebase
+      .firestore()
+      .collection('appointments')
+      .where('doctor', '==', specialist)
+      .where('patient', '==', patient)
+      .where('status', '==', 'closed')
+      .orderBy('date', 'asc')
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          data.push(doc.data());
+        });
+        console.log(data);
+        return data;
+      })
+      .catch((error) => {
+        console.log('Error getting documents: ', error);
+      });
+  }
+
+  getMedicalHistoryBySpecialtyAndPatient(specialty: any, patient: any, status: any) {
+    const data: any[] = [];
+    return firebase
+      .firestore()
+      .collection('appointments')
+      .where('specialty', '==', specialty)
+      .where('patient', '==', patient)
+      .where('status', '==', status)
+      .orderBy('date', 'asc')
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          data.push(doc.data());
+        });
+        console.log(data);
+        return data;
+      })
+      .catch((error) => {
+        console.log('Error getting documents: ', error);
       });
   }
 

@@ -7,6 +7,7 @@ import { SpinnerService } from 'src/app/services/spinner.service';
 import { Patient } from 'src/app/models/patient';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { StorageService } from 'src/app/services/storage.service';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-register-patient',
@@ -27,7 +28,8 @@ export class RegisterPatientComponent implements OnInit {
               private spinnerService: SpinnerService,
               public auth: AuthService,
               public firestore: FirestoreService,
-              public storage: StorageService) {
+              public storage: StorageService,
+              private modal: ModalService) {
     this.form = new FormGroup({
       email: new FormControl(),
       password: new FormControl(),
@@ -50,28 +52,24 @@ export class RegisterPatientComponent implements OnInit {
     this.user = this.form.value;
     this.user.approved = true;
     this.user.role = 'Patient';
-    console.log(this.captcha);
-    if (!this.captcha) {
-      this.toastr.error('Captcha incorrecto', 'Error');
-      return;
-    }
 
-    if (this.user.password != this.rePassword) {
-      this.toastr.error('Las contraseñas no coinciden', 'Error');
-      return;
-    }
+    if (this.user.password === this.rePassword) {
 
-    this.spinnerService.show();
-
-    this.auth
-        .register(this.user, this.file)
-        .then((res) => { })
-        .catch((e) => {
-        this.toastr.error(e.message);
-      })
-      .finally(() => {
+      this.modal.modalCaptcha().then(res => {
+        if (res) {
+          this.auth.register(this.user, this.file).then((res) => {
+          }).catch(e => {
+            this.toastr.error(e.message);
+          }).finally(() => {
+            this.spinnerService.hide();
+          });
+        }
         this.spinnerService.hide();
-      });
+      })
+    } else {
+      this.spinnerService.hide();
+      this.modal.modalMessage('Las contraseñas no coinciden', "error");
+    }
    
   }
 

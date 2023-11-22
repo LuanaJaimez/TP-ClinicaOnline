@@ -3,21 +3,20 @@
         <div class="row align-items-md-stretch text-center">
             <h1>REGISTRO</h1>
             <hr>
-            <div class="aspect-ratio-1-1">
-                <img [src]="imgDtr"
-                        (mouseout)="imgDtr = '/assets/logos/reg-doctor.png'"
-                        style="width: 100%;"
-                        class="pic"
-                        routerLink="./doctor">
-                        <p>Doctor</p> 
-            </div>
-            <div class="aspect-ratio-1-1">
-                <img [src]="imgPct"
-                        (mouseout)="imgPct = '/assets/logos/reg-patient.png'"
-                        style="width: 100%;"
-                        class="pic"
-                        routerLink="./patient">  
-                        <p>Paciente</p>
+            <div class="row align-items-md-stretch">
+                <div class="brightness col text-center">
+                    <img src='/assets/logos/reg-doctor.png'
+                            class="aspect-ratio-1-1"
+                            style="width: 100%;"
+                            routerLink="./doctor">
+                            <p>Doctor</p> 
+                </div>
+                <div class="brightness col text-center">
+                    <img src='/assets/logos/reg-patient.png'
+                            class="aspect-ratio-1-1"
+                            routerLink="./patient">
+                            <p>Paciente</p>
+                </div>
             </div>
         </div>
     </div>

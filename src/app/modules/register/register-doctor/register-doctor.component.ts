@@ -5,6 +5,7 @@ import { Doctor } from 'src/app/models/doctor';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
+import { ModalService } from 'src/app/services/modal.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { StorageService } from 'src/app/services/storage.service';
 
@@ -32,7 +33,8 @@ export class RegisterDoctorComponent implements OnInit {
               private spinnerService: SpinnerService,
               public auth: AuthService,
               public firestore: FirestoreService,
-              public storage: StorageService) {
+              public storage: StorageService,
+              private modal: ModalService) {
     this.formReg= new FormGroup({
       email: new FormControl(),
       password: new FormControl(),
@@ -99,32 +101,34 @@ export class RegisterDoctorComponent implements OnInit {
     }
   }
 
+  uploadImage($event: any) {
+    this.file = $event.target.files;
+    console.log(this.file);
+  }
+
   registerDoctor() {
     this.user = this.formReg.value;
     this.user.specialties = this.specialties;
     this.user.approved = false;
     this.user.role = 'Doctor';
-    
-    if (!this.captcha) {
-      this.toastr.error('Captcha incorrecto', 'Error');
-      return;
-    }
 
-    if (this.user.password != this.rePassword) {
-      this.toastr.error('Las contraseñas no coinciden', 'Error');
-      return;
-    }
+    if (this.user.password === this.rePassword) {
 
-    this.spinnerService.show();
-    this.auth
-        .register(this.user, this.file)
-        .then((res) => {})
-        .catch((e) => {
-        this.toastr.error(e.message);
-      })
-      .finally(() => {
+      this.modal.modalCaptcha().then(res => {
+        if (res) {
+          this.auth.register(this.user, this.file).then((res) => {
+          }).catch(e => {
+            this.toastr.error(e.message);
+          }).finally(() => {
+            this.spinnerService.hide();
+          });
+        }
         this.spinnerService.hide();
-      });
+      })
+    } else {
+      this.spinnerService.hide();
+      this.modal.modalMessage('Las contraseñas no coinciden', "error");
+    }
   }
 
   onCheckboxChange(event: any) {
@@ -137,10 +141,5 @@ export class RegisterDoctorComponent implements OnInit {
 
   captchaResult(result: any) {      
     this.captcha = result;
-  }
-
-  uploadImage($event: any) {
-    this.file = $event.target.files;
-    console.log(this.file);
   }
 }

@@ -44,7 +44,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     
   ],
   providers: [
-    
+
   ],
   bootstrap: [AppComponent],
 })

@@ -10,23 +10,23 @@ export class AppointmentStatusPipe implements PipeTransform {
     var status = value;
 
     if(status == "pending") {
-      status = "PENDIENTE";
+      status = "Pendiente";
     }
 
     if(status == "canceled") {
-      status = "CANCELADO";
+      status = "Cancelado";
     }
 
     if(status == "rejected") {
-      status = "RECHAZADO";
+      status = "Rechazado";
     }
 
     if(status == "accepted") {
-      status = "ACEPTADO";
+      status = "Aceptado";
     }
 
     if(status == "closed") {
-      status = "FINALIZADO";
+      status = "Finalizado";
     }
     
     return status;

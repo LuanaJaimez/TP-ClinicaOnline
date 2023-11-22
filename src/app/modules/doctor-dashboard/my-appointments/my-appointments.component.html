@@ -9,6 +9,12 @@
         Filtrar por paciente
     </button>
 </div>
+<div class="d-flex justify-content-center">
+    <input class="form-control rounded-25 py-2" type="search" placeholder="Buscar..." [(ngModel)]="searchValue" style="width:90%;">
+    <button type="button" class="btn btn-dark" style="width:10%;" (click)="search()">
+        <i class="bi bi-search"></i>
+    </button>
+</div>
 <hr>
 <div *ngIf="appointments?.length > 0; else elseBlock">
 
@@ -33,11 +39,11 @@
 
             <tbody>
                 <tr *ngFor="let appointment of appointments; let i=index">
-                    <td class="align-middle">{{appointment.patient }}</td>
+                    <td class="align-middle">{{appointment.patient}}</td>
                     <td class="align-middle">{{appointment.specialty}}</td>
                     <td class="align-middle">{{appointment.date}}</td>
                     <td class="align-middle">
-                        <label class="btn info"><h3> {{appointment.status}} </h3></label>
+                        <label class="btn info"><h3> {{appointment.status | appointmentStatus}} </h3></label>
                     </td>
 
                     <td class="align-middle" *ngIf="appointment.status == 'pending'">
@@ -139,11 +145,11 @@
                 <h1>Cancelacion</h1>
                 <div class="form-group col-md-12">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Ingrese motivo de la cancelacion/rechazo"   [formControl]="cancelReason">
-                        <div class="input-group-append">
-                          <button class="btn btn-dark" type="button" (click)="cancelOrRejectAppointment()"  data-bs-dismiss="modal">Confirmar</button>
-                        </div>
-                      </div>                                    
+                        <input type="text" class="form-control" placeholder="Ingrese motivo de la cancelacion/rechazo" [formControl]="cancelReason">
+                    </div>
+                    <div class="input-group-append">
+                        <button class="btn btn-dark" type="button" (click)="cancelOrRejectAppointment()"  data-bs-dismiss="modal">Confirmar</button>
+                    </div>                                   
                 </div>
             </div>
             <div class="modal-footer text-center">
@@ -159,11 +165,17 @@
         <div class="modal-content">
             <div class="modal-body text-left">
                 <h1>Informacion del turno</h1>
-                <p>Estado: {{appointmentStatus}}</p>
+                <p>Estado: {{appointmentStatus | appointmentStatus}}</p>
                 <p>Comentario: {{appointmentInfo}}</p> 
                 <div *ngIf="appointmentDiagnostic != ''"> 
                     <p>Diagnostico: {{appointmentDiagnostic}}</p> 
                 </div>
+                <p>Observaciones:</p>
+                <ul>
+                    <li *ngFor="let info of appointmentAditionalInfo | keyvalue">
+                        {{info.key}}: {{info.value}}
+                    </li>
+                </ul>
             </div>
             <div class="modal-footer text-center">
                 <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
@@ -180,6 +192,96 @@
             <div class="modal-body">
                 <h1 class="text-center">Diagnostico</h1>
                 <div class="form-group col-md-12">
+                    <div class="row align-items-center">
+                        <div class="form-group col-md-6">
+                            <label for="diagnostic">Altura</label>
+                            <input type="number" class="form-control" placeholder="Ingrese altura en cm." [formControl]="height">
+                        </div>
+                
+                        <div class="form-group col-md-6">
+                            <label for="diagnostic">Peso</label>
+                            <input type="number" class="form-control" placeholder="Ingrese peso" [formControl]="weight">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row align-items-center">
+                        <div class="form-group col-md-6">
+                            <label for="diagnostic">Temperatura</label>
+                            <input type="number" class="form-control" placeholder="Ingrese temperatura" [formControl]="temp">
+                        </div>
+                
+                        <div class="form-group col-md-6">
+                            <label for="diagnostic">Presion</label>
+                            <input type="number" class="form-control" placeholder="Ingrese presion arterial" [formControl]="pressure">
+                        </div>
+                    </div>
+                    <br>
+                    <label for="diagnostic">Informacion adicional</label>
+                    <br>
+                    <br>
+                    <div class="row align-items-center">
+                        <div class="form-group col-md-6">
+                            <input type="text" class="form-control" placeholder="Campo 1" [formControl]="field1Key">
+                        </div>
+                
+                        <div class="form-group col-md-6">
+                            <input type="text" class="form-control" placeholder="Valor 1" [formControl]="field1Value">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row align-items-center">
+                        <div class="form-group col-md-6">
+                            <input type="text" class="form-control" placeholder="Campo 2" [formControl]="field2Key">
+                        </div>
+                
+                        <div class="form-group col-md-6">
+                            <input type="text" class="form-control" placeholder="Valor 2" [formControl]="field2Value">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row align-items-center">
+                        <div class="form-group col-md-6">
+                            <input type="text" class="form-control" placeholder="Campo 3" [formControl]="field3Key">
+                        </div>
+                
+                        <div class="form-group col-md-6">
+                            <input type="text" class="form-control" placeholder="Valor 3" [formControl]="field3Value">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row align-items-center">
+                        <div class="form-group col-md-6">
+                            <input type="text" class="form-control" placeholder="Campo 4" [formControl]="field4Key">
+                        </div>
+                
+                        <div class="form-group col-md-6">                            
+                            <input type="range" #time (input)="time.value" id="time" min="0" max="10" step="0.5" style="width: 100%;" (click)="setField4Value($event)">
+                            <label for="time" class="text-center">({{ time.value }})</label>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row align-items-center">
+                        <div class="form-group col-md-6">
+                            <input type="text" class="form-control" placeholder="Campo 5" [formControl]="field5Key">
+                        </div>
+                
+                        <div class="form-group col-md-6">
+                            <input type="number" class="form-control" placeholder="Valor 5" [formControl]="field5Value">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row align-items-center">
+                        <div class="form-group col-md-6">
+                            <input type="text" class="form-control" placeholder="Campo 6" [formControl]="field6Key">
+                        </div>
+                
+                        <div class="form-group col-md-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" (change)="setField6Value($event)">
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
                     <input type="text" class="form-control" placeholder="Ingrese comentario" [formControl]="comment">
                     <br>
                     <input type="text" class="form-control" placeholder="Ingrese diagnostico" [formControl]="diagnostic">                   

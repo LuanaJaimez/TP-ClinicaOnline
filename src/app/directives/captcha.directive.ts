@@ -1,16 +1,17 @@
-import { Directive, EventEmitter, Input, Output, Renderer2, SimpleChanges } from '@angular/core';
+import { Directive, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 
 @Directive({
   selector: '[appCaptcha]'
 })
 export class CaptchaDirective {
 
-  @Output() captcha = new EventEmitter<String>();
+  captchaD: any = []
+
   @Output() captchaResult = new EventEmitter<boolean>();
-  @Input() requestCaptcha = false;  
-  @Input() enteredCaptcha = false;
-  
-  theCatpcha: any;
+  @Output() captcha = new EventEmitter<String>();
+
+  @Input() requestCaptcha = false;
+  @Input() enteredCaptcha: string = '';
 
   constructor() { }
 
@@ -18,7 +19,16 @@ export class CaptchaDirective {
     this.createCaptcha();
   }
 
+  onChange(value: any) {
+    if (value.length == 6) {
+      setTimeout(() => {
+        this.validateCaptcha();
+      }, 200)
+    }
+  }
+
   createCaptcha() {
+    const activeCaptcha = document.getElementById("captcha");
     let captcha = []
     for (let q = 0; q < 6; q++) {
       if (q % 2 == 0) {
@@ -28,20 +38,21 @@ export class CaptchaDirective {
       }
     }
     const theCaptcha = captcha.join("");
-    this.theCatpcha = theCaptcha;
-    this.captcha.emit(theCaptcha);
+    this.captchaD = theCaptcha;
+    activeCaptcha!.innerHTML = `${theCaptcha}`;
   }
 
   validateCaptcha() {
-    this.captchaResult.emit(this.enteredCaptcha === this.theCatpcha);
-  }  
+    this.captchaResult.emit(this.enteredCaptcha === this.captchaD);
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['requestCaptcha']) {
-      this.createCaptcha();     
+      this.createCaptcha();
     }
-    
+
     if (changes['enteredCaptcha']) {
+
       this.validateCaptcha();
     }
   }

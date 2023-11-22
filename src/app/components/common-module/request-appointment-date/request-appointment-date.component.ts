@@ -7,6 +7,7 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { Auth } from '@angular/fire/auth';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-request-appointment-date',
@@ -33,7 +34,8 @@ export class RequestAppointmentDateComponent implements OnInit {
     public storage: StorageService,
     private router: Router,
     private readonly Auth: Auth,
-    public afAuth: AngularFireAuth) {}
+    public afAuth: AngularFireAuth,
+    public datepipe: DatePipe) {}
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('userData') || '{}');
@@ -48,13 +50,13 @@ export class RequestAppointmentDateComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
 
-   if(changes['specialty'] !== undefined) {
-      this.specialty=changes['specialty'].currentValue;
-      this.doctor = '';
-    }
-
     if(changes['doctor'] !== undefined) {
       this.doctor=changes['doctor'].currentValue;
+      this.specialty = '';
+    }
+
+    if(changes['specialty'] !== undefined) {
+      this.specialty=changes['specialty'].currentValue;
     }
 
     if(changes['patient'] !== undefined) {
@@ -105,7 +107,6 @@ export class RequestAppointmentDateComponent implements OnInit {
     }
   }
 
-  //generate half hour increment times between one hour and another
   generateDates(startHour: any, endHour: any) {
     var times: any[] = [];
     var startHourArr = startHour.split(':');
@@ -133,7 +134,6 @@ export class RequestAppointmentDateComponent implements OnInit {
     return times;
   }
   
-  //generate date for a given day of the week for the next 15 days
   generateDays(day: any, startHour: any, endHour: any) {
     var hours = this.generateDates(startHour, endHour);
     var date = new Date();
@@ -147,7 +147,7 @@ export class RequestAppointmentDateComponent implements OnInit {
     date.setDate(date.getDate() + daysToAdd);
     for (let i = 0; i < 2; i++) {
       for(let j = 0; j < hours.length; j++) {
-        this.appointments.push(new Date(date).toLocaleDateString('es-es', { month:"numeric", day:"numeric"}) + '-' + hours[j]);
+        this.appointments.push(new Date(date).toLocaleDateString('af-ZA', { year: "numeric", month:"numeric", day:"numeric" }) + ' ' + hours[j]);
       }
       date.setDate(date.getDate() + 7);
     }
