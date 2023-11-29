@@ -68,6 +68,10 @@ En esta seccion el administrador puede solicitarle un turno a cualquiera de los 
 En esta seccion el administrador puede ver todos los turnos de la clinica y cancelar los mismos, dejando un comentario del motivo
 Tiene un filtro que le permite buscar por especialista y especialidad
 
+### Informes:
+![ImgInformes](./ImgReadme/informes.png)
+En esta seccion el administrador puede ver el log de ingresos, graficos para los turnos por especialidad, graficos para los turnos por dia, graficos para los turnos solicitados por especialidad y graficos para los turnos finalizados por especialidad. Estos informes pueden descargarse en PDF
+
 
 ## Especialista
 El Especialista puede acceder a...
