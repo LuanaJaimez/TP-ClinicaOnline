@@ -1,17 +1,18 @@
-import { animate, style, transition, trigger } from '@angular/animations';
+import { animate, style, transition, trigger, useAnimation } from '@angular/animations';
 import { Component } from '@angular/core';
 import { Router, NavigationStart, Event, NavigationEnd} from '@angular/router';
+import { moveFromBottom, moveFromBottomFade, rotateCubeToTop, rotateRoomToTop } from 'ngx-router-animations';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   animations:[
-    trigger('admin', [transition('* => admin', [style({ opacity: 0 }), animate(2000)])]),
-    trigger('patient', [transition('* => patient', [style({ opacity: 0 }), animate(2000)])]),
-    trigger('doctor', [transition('* => doctor', [style({ opacity: 0 }), animate(2000)])]),
-    trigger('verification', [transition('* => verification', [style({ opacity: 0 }), animate(2000)])]),
-    trigger('not-found', [transition('* => not-found', [style({ opacity: 0 }), animate(2000)])])
+    trigger('admin', [transition('* => admin', useAnimation(moveFromBottomFade), {delay: 200})]),
+    trigger('patient', [transition('* => patient', useAnimation(moveFromBottomFade), {delay: 200})]),
+    trigger('doctor', [transition('* => doctor', useAnimation(moveFromBottomFade), {delay: 200})]),
+    trigger('verification', [transition('* => verification', useAnimation(moveFromBottomFade), {delay: 200})]),
+    trigger('not-found', [transition('* => not-found', useAnimation(moveFromBottomFade), {delay: 200})])
   ]
 })
 

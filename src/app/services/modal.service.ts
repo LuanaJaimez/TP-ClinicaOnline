@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { createCanvas } from 'canvas';
 import { ToastrService } from 'ngx-toastr';
 import Swal, { SweetAlertResult } from 'sweetalert2';
+import { Captcha2Directive } from '../directives/captcha2.directive';
 
 export type icon = 'warning' | 'error' | 'success' | 'info' | 'question';
 
@@ -29,7 +30,7 @@ export class ModalService {
     const canvasHeight = 100;
     const captchaFont = '24px Helvetica Neue';
 
-    let captcha2 = this.createCaptcha();
+    let captcha2 = new Captcha2Directive().createCaptcha();
 
     const canvas = createCanvas(canvasWidth, canvasHeight);
 
@@ -64,7 +65,7 @@ export class ModalService {
       title: 'Ingrese el codigo',
       html: `<img src="${imageBase64}" alt="Captcha" />`,
       input: 'text',
-      text: '¡No sea un robot!',
+      text: 'No es humano',
       icon: 'info',
       showCancelButton: true,
       cancelButtonText: 'Cancelar',
@@ -85,19 +86,6 @@ export class ModalService {
     }
 
     return false;
-  }
-
-  createCaptcha() {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    let captcha = '';
-    for (let q = 0; q < 6; q++) {
-      if (q % 2 == 0) {
-        captcha += characters.charAt(Math.floor(Math.random() * 26));
-      } else {
-        captcha += Math.floor(Math.random() * 10);
-      }
-    }
-    return captcha;
   }
 }
 

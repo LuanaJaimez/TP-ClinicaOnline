@@ -10,15 +10,15 @@ export class Captcha2Directive {
   constructor() { }
 
   createCaptcha() {
-    let captcha = []
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let captcha = '';
     for (let q = 0; q < 6; q++) {
       if (q % 2 == 0) {
-        captcha[q] = String.fromCharCode(Math.floor(Math.random() * 26 + 65));
+        captcha += characters.charAt(Math.floor(Math.random() * 26));
       } else {
-        captcha[q] = Math.floor(Math.random() * 10 + 0);
+        captcha += Math.floor(Math.random() * 10);
       }
     }
-    const theCaptcha = captcha.join("");
-    return theCaptcha;
+    return captcha;
   }
 }

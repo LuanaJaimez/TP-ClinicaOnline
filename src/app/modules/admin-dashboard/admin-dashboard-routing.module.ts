@@ -8,6 +8,7 @@ import { UsersComponent } from './users/users.component';
 import { AppointmentsComponent } from './appointments/appointments.component';
 import { AdminRequestAppointmentComponent } from './admin-request-appointment/admin-request-appointment.component';
 import { AdminWelcomeComponent } from './admin-welcome/admin-welcome.component';
+import { StatsComponent } from './stats/stats.component';
 
 const routes: Routes = [
   { path: '', component: AdminDashboardComponent,children:[
@@ -17,6 +18,7 @@ const routes: Routes = [
     {path: 'users', component: UsersComponent, data: {state:  'users'}},
     {path: 'appointments', component: AppointmentsComponent, data: {state:  'appointments'} },
     {path: 'request-appointment-admin', component: AdminRequestAppointmentComponent, data: {state:  'request-appointment-admin'}},
+    {path: 'stats', component: StatsComponent, data: {state:  'stats'} },
   ]},
   { path: '**', pathMatch: 'full', component: NotFoundComponent, data: {state:  'not-found'} }
 ];

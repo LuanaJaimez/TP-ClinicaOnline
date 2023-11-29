@@ -7,13 +7,15 @@ import { RegisterHomeComponent } from './register-home/register-home.component';
 import { RegisterDoctorComponent } from './register-doctor/register-doctor.component';
 import { RegisterPatientComponent } from './register-patient/register-patient.component';
 import { SharedModule } from 'src/app/components/common-module/common.module';
+import { NumbersOnlyDirective } from 'src/app/directives/numbers-only.directive';
 
 @NgModule({
   declarations: [
     RegisterComponent,
     RegisterHomeComponent,
     RegisterDoctorComponent,
-    RegisterPatientComponent
+    RegisterPatientComponent,
+    NumbersOnlyDirective
   ],
   imports: [
     CommonModule,

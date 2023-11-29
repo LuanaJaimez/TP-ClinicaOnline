@@ -13,7 +13,7 @@ import { SharedModule } from 'src/app/components/common-module/common.module';
 
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     CommonModule,
@@ -22,7 +22,8 @@ import { SharedModule } from 'src/app/components/common-module/common.module';
     MatInputModule,
     MatFormFieldModule,
     MatButtonModule,
-    SharedModule
+    SharedModule,
+    
   ]
 })
 export class LoginModule { }

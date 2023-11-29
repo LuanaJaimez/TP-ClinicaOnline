@@ -36,7 +36,7 @@
                                     <div class="form-group">
                                         <label style="float: left">DNI</label>
                                         <input class="form-control" formControlName="dni" type="dni"
-                                            placeholder="Ingrese DNI" [(ngModel)]="doctor.dni" required>
+                                            placeholder="Ingrese DNI" [(ngModel)]="doctor.dni" required appNumbersOnly>
                                         <div class="errorMessage"
                                             *ngIf="getValue('dni')?.invalid && (getValue('dni').touched || getValue('dni').dirty)">
                                             Ingrese un DNI valido</div>
@@ -46,7 +46,7 @@
                                     <div class="form-group">
                                         <label style="float: left">Edad</label>
                                         <input class="form-control" formControlName="age" type="age"
-                                            placeholder="Ingrese edad" [(ngModel)]="doctor.age" required>
+                                            placeholder="Ingrese edad" [(ngModel)]="doctor.age" required appNumbersOnly>
                                         <div class="errorMessage"
                                             *ngIf="getValue('age')?.invalid && (getValue('age').touched || getValue('age').dirty)">
                                             Ingrese una edad válida (18-120)</div>

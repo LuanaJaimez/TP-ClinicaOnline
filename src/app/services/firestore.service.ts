@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { User } from '../models/user';
 import firebase from 'firebase/compat/app';
+import { firstValueFrom } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root',
@@ -687,6 +689,17 @@ export class FirestoreService {
       .catch((error) => {
         console.log('Error getting documents: ', error);
       });
+  }
+
+  
+  traer(db:string){
+    const col =  this.afs.collection(db);
+    return col.valueChanges();
+  }
+
+  traerFiltrado(db:string, campo:string, valor:any){
+    const col =  this.afs.collection(db, ref=>ref.where(campo,'==',valor));
+    return firstValueFrom(col.valueChanges());
   }
 
 }
