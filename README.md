@@ -5,7 +5,7 @@ dos laboratorios (físicos en la clínica), y una sala de espera general. Está 
 viernes en el horario de 8:00 a 19:00, y los sábados en el horario de 8:00 a 14:00.
 Trabajan en ella profesionales de diversas especialidades, que ocupan los consultorios acorde a su
 disponibilidad, y reciben en ellos pacientes con turno para consulta o tratamiento. Dichos turnos son
-pedidos por esta pagina seleccionando el profesional o la especialidad.
+pedidos por esta pagina seleccionando el profesional o la especialidad
 
 ## Pantallas
 
@@ -99,9 +99,9 @@ En esta seccion el paciente ve sus datos personales
 
 ### Sacar Turno:
 ![ImgSacarTurno](./ImgReadme/sacarTurnoP.png)
-En esta seccion el paciente puede solicitar turnos medicos. Debe seleccionar alguna de las especialidades disponibles en la Clinica, al seleccionarla se le muestra los especialistas y sus turnos disponibles.
+En esta seccion el paciente puede solicitar turnos medicos. Debe seleccionar alguna de las especialidades disponibles en la Clinica, al seleccionarla se le muestra los especialistas y sus turnos disponibles
 
 ### Mis Turnos:
 ![ImgTurnosPaciente](./ImgReadme/turnosPaciente.png)
 En esta seccion el paciente ve todos sus turnos, los cuales puede cancelar en caso de ser necesario dejando un comentario del motivo. Tambien, al finalizar el mismo se le da la opcion de calificar la atencion del especialista y de ver la reseña del turno.
-Tiene un filtro que le permite buscar por cualquier campo del Turno.
+Tiene un filtro que le permite buscar por cualquier campo del Turno
